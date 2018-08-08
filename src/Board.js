@@ -79,12 +79,34 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      let board = this.rows();
+      //for each row in board
+      for (var i = 0; i < board.length; i++) {
+        //let count=0
+        let count = 0;
+        //for each column in row
+        for (var j = 0; j < board[i].length; j++) {
+          //check if current column === 1
+          if (board[i][j] === 1) {
+            //if so, count++
+            count++;
+          }
+        }
+        //if count >= 2
+        if (count >= 2) {
+          //return true;
+          return true;
+        }
+
+      }
+      // return false 
+      return false; 
     },
 
 
@@ -99,7 +121,33 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      let col = [];
+      let board = this.rows();
+      //initialize array to store count of occurrences per column
+      for (var i = 0; i < board.length; i++) {
+        col[i] = 0;
+      }
+ 
+      //for each row
+      for (var i = 0; i < board.length; i++) {
+        //for each column in row
+        for (var j = 0; j < board[i].length; j++) {
+          //if column === 1
+          if (board[i][j] === 1) {
+            //if so, update col[i] by 1
+            col[j]++;
+          }
+          //if col[j] >=2;
+          if (col[j] >= 2) {
+            //return true; 
+            return true;
+          }
+        }
+        
+      }
+      //return false
+      console.log(col)
+      return false;
     },
 
 
@@ -114,6 +162,34 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      let board = this.rows();
+      let points = [];
+      
+      //grab points and store their locations in points array
+      //for each row
+      for (var i = 0; i < board.length; i++) {
+        //for each column in row
+        for (var j = 0; j < board[i].length; j++) {
+          //if board[i][j] === 1
+          if (board[i][j] === 1) {
+            //push [i, j] into points array
+            points.push([i, j]);
+          }
+        }
+      }
+
+      //for each point coordinate in points array, not including the last point in the array
+      for (var k = 0; k < points.length - 1; k++) {
+        //for each subsequent coordinate
+        for (var l = k + 1; l < points.length; l++) {
+          //if the 2 points' difference in i value === difference in j value
+          if (points[l][0] - points[k][0] === points[l][1] - points[k][1]) {
+            //return true;
+            return true;
+          }
+        }
+      }
+
       return false; // fixme
     },
 
