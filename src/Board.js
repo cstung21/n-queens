@@ -106,29 +106,6 @@
         }
       }
       return false;
-      // return false;
-      // let board = this.rows();
-      // //for each row in board
-      // for (var i = 0; i < board.length; i++) {
-      //   //let count=0
-      //   let count = 0;
-      //   //for each column in row
-      //   for (var j = 0; j < board[i].length; j++) {
-      //     //check if current column === 1
-      //     if (board[i][j] === 1) {
-      //       //if so, count++
-      //       count++;
-      //     }
-      //   }
-      //   //if count >= 2
-      //   if (count >= 2) {
-      //     //return true;
-      //     return true;
-      //   }
-
-      // }
-      // // return false 
-      // return false; 
     },
 
 
@@ -158,34 +135,6 @@
         }
       }      
       return false;
-      
-      // let col = [];
-      // let board = this.rows();
-      // //initialize array to store count of occurrences per column
-      // for (var i = 0; i < board.length; i++) {
-      //   col[i] = 0;
-      // }
- 
-      // //for each row
-      // for (var i = 0; i < board.length; i++) {
-      //   //for each column in row
-      //   for (var j = 0; j < board[i].length; j++) {
-      //     //if column === 1
-      //     if (board[i][j] === 1) {
-      //       //if so, update col[i] by 1
-      //       col[j]++;
-      //     }
-      //     //if col[j] >=2;
-      //     if (col[j] >= 2) {
-      //       //return true; 
-      //       return true;
-      //     }
-      //   }
-        
-      // }
-      // //return false
-
-      // return false;
     },
 
 
@@ -201,7 +150,7 @@
       var count = 0;
       var input = majorDiagonalColumnIndexAtFirstRow;
       //loop through first row
-      for (var i = 0; i < board.length - 1; i++) {
+      for (var i = 0; i < board.length; i++) {
         if (board[i][input] === 1) {
           count++;
         }
@@ -216,42 +165,12 @@
       var board = this.rows();
       var length = board.length;
 
-      for (var i = -3; i < length; i++) {
+      for (var i = -(length - 2); i < length; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
       }
-
       return false;
-      // let board = this.rows();
-      // let points = [];
-      
-      // //grab points and store their locations in points array
-      // //for each row
-      // for (var i = 0; i < board.length; i++) {
-      //   //for each column in row
-      //   for (var j = 0; j < board[i].length; j++) {
-      //     //if board[i][j] === 1
-      //     if (board[i][j] === 1) {
-      //       //push [i, j] into points array
-      //       points.push([i, j]);
-      //     }
-      //   }
-      // }
-
-      // //for each point coordinate in points array, not including the last point in the array
-      // for (var k = 0; k < points.length; k++) {
-      //   //for each subsequent coordinate
-      //   for (var l = k + 1; l < points.length; l++) {
-      //     //if the 2 points' difference in i value === difference in j value
-      //     if (points[l][0] - points[k][0] === points[l][1] - points[k][1]) {
-      //       //return true;
-      //       return true;
-      //     }
-      //   }
-      // }
-
-      // return false; 
     },
 
 
@@ -261,39 +180,31 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var board = this.rows();
+      var count = 0;
+      var input = minorDiagonalColumnIndexAtFirstRow;
+
+      for (var i = 0; i < board.length; i++) {
+        if (board[i][input] === 1) {
+          count++;
+        }
+        input--;
+      }
+
+      return count >= 2;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var board = this.rows();
+      
+      for (var i = 0; i < board.length + 2; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
       return false;
-      // // create board var
-      // var board = this.rows();
-      // //create points array to store coordinates
-      // var points = [];
-      // //loop through rows
-      // for (var i = 0; i < board.length; i++) {
-      //   //loop through columns
-      //   for (var j = 0; j < board[i].length; j++) {
-      //   //check if column value is 1
-      //     if (board[i][j] === 1) {
-      //   //add coordinates to points array
-      //       points.push([i, j]);
-      //     }
-      //   }
-      // }
-      // // loop through points array
-      // for (var k = 0; k < points.length; k++) {
-      // //   compare values of each coordinate
-      //   for (var l = k + 1; l < points.length; l++) {
-      // //   if absolute value of difference between indices are equal, return true
-      //     if (points[k][0] - points[l][0] === (points[k][1] - points[l][1]) * -1) {
-      //       return true;
-      //     }
-      //   }
-      // }
-      // // return false
-      // return false;
+
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
